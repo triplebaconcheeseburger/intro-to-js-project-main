@@ -59,7 +59,6 @@ function addProductToCart(productId) {
       cart.push(product);
     }
   }
-  console.log(`addProductToCart: Cart now: ${JSON.stringify(cart)}`);
   
 }
 
@@ -73,7 +72,6 @@ function increaseQuantity(productId) {
   if (product) {
     product.quantity += 1;
   }
-  console.log(`increaseQuantity: Cart now: ${JSON.stringify(cart)}`);
 }
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
@@ -90,7 +88,6 @@ function decreaseQuantity(productId) {
       removeProductFromCart(productId);
     }
   }
-  console.log(`decreaseQuantity: Cart now: ${JSON.stringify(cart)}`);
 }
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -105,7 +102,6 @@ function removeProductFromCart(productId) {
     product.quantity = 0;
     cart = cart.filter(item => item.productId !== productId);
   }
-  console.log(`removeProductFromCart: Cart now: ${JSON.stringify(cart)}`);
 }
 
 /* Create a function named cartTotal that has no parameters
@@ -119,7 +115,6 @@ function cartTotal() {
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].price * cart[i].quantity;
   }
-  console.log(`cartTotal: ${total}`);
   return parseFloat(total.toFixed(2));
 }
 
@@ -143,16 +138,7 @@ function pay(amount) {
   return amount - total;
 }
 
-/* Function to display the cart items with formatted prices */
-function displayCart() {
-  cart.forEach(product => {
-    console.log(`${product.name}: $${product.price} (Quantity: ${product.quantity})`);
-  });
-}
-
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
-
-
 
 /* The following is for running unit tests. 
    To fully complete this project, it is expected that all tests pass.
@@ -170,6 +156,7 @@ module.exports = {
    cartTotal,
    pay, 
    emptyCart,
+  
    /* Uncomment the following line if completing the currency converter bonus */
    // currency
 }
