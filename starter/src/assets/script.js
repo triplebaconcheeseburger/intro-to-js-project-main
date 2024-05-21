@@ -11,7 +11,7 @@ let products = [];
 */
 const product1 = {
   name: "Cherry",
-  price: parseFloat((1.50).toFixed(2)),
+  price: 1,
   quantity: 0,
   productId: 1,
   image: "./images/cherry.jpg"
@@ -19,7 +19,7 @@ const product1 = {
 
 const product2 = {
   name: "Orange",
-  price: parseFloat((2.00).toFixed(2)),
+  price: 1,
   quantity: 0,
   productId: 2,
   image: "./images/orange.jpg"
@@ -27,7 +27,7 @@ const product2 = {
 
 const product3 = {
   name: "Strawberry",
-  price: parseFloat((3.00).toFixed(2)),
+  price: 2,
   quantity: 0,
   productId: 3,
   image: "./images/strawberry.jpg"
@@ -115,10 +115,14 @@ function removeProductFromCart(productId) {
 */
 
 function cartTotal() {
-  const total = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price * cart[i].quantity;
+  }
   console.log(`cartTotal: ${total}`);
-  return total;
+  return parseFloat(total.toFixed(2));
 }
+
 
 /* Create a function called emptyCart that empties the products from the cart */
 
@@ -142,7 +146,7 @@ function pay(amount) {
 /* Function to display the cart items with formatted prices */
 function displayCart() {
   cart.forEach(product => {
-    console.log(`${product.name}: $${product.price.toFixed(2)} (Quantity: ${product.quantity})`);
+    console.log(`${product.name}: $${product.price} (Quantity: ${product.quantity})`);
   });
 }
 
