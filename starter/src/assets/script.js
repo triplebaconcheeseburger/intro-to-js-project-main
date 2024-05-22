@@ -9,29 +9,26 @@ let products = [];
    - productId: unique id for the product (number)
    - image: picture of product (url string)
 */
-const product1 = {
-  name: "Cherry",
-  price: 1,
-  quantity: 0,
-  productId: 1,
-  image: "./images/cherry.jpg"
-};
+let product1 = {
+    name: "Cherry",
+    price: 1.50,
+    quantity: 0,
+    productId: 1,
+    image: "./images/cherry.jpg"}
 
-const product2 = {
-  name: "Orange",
-  price: 1,
-  quantity: 0,
-  productId: 2,
-  image: "./images/orange.jpg"
-};
-
-const product3 = {
-  name: "Strawberry",
-  price: 2,
-  quantity: 0,
-  productId: 3,
-  image: "./images/strawberry.jpg"
-};
+    let product2 = {
+      name: "Strawberry",
+      price: 2.50,
+      quantity: 0,
+      productId: 2,
+      image: "./images/strawberry.jpg"}
+  
+let product3 = {
+    name: "Orange",
+    price: 3.00,
+    quantity: 0,
+    productId: 3,
+    image: "./images/orange.jpg" }
 
 products.push(product1, product2, product3);
 
@@ -42,7 +39,6 @@ products.push(product1, product2, product3);
 */
 
 /* Declare an empty array named cart to hold the items in the cart */
-
 let cart = [];
 
 /* Create a function named addProductToCart that takes in the product productId as an argument
@@ -52,15 +48,15 @@ let cart = [];
 */
 
 function addProductToCart(productId) {
-    const product = products.find(item => item.productId === productId);
+  const product = products.find(p => p.productId === productId);
   if (product) {
-    product.quantity += 1;
+    product.quantity++;
     if (!cart.includes(product)) {
       cart.push(product);
     }
   }
-  
 }
+
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
@@ -68,9 +64,9 @@ function addProductToCart(productId) {
 */
 
 function increaseQuantity(productId) {
-  const product = products.find(item => item.productId === productId);
+  const product = cart.find(p => p.productId === productId);
   if (product) {
-    product.quantity += 1;
+    product.quantity++;
   }
 }
 
@@ -81,9 +77,9 @@ function increaseQuantity(productId) {
 */
 
 function decreaseQuantity(productId) {
-  const product = products.find(item => item.productId === productId);
-  if (product && product.quantity > 0) {
-    product.quantity -= 1;
+  const product = cart.find(p => p.productId === productId);
+  if (product) {
+    product.quantity--;
     if (product.quantity === 0) {
       removeProductFromCart(productId);
     }
@@ -97,12 +93,13 @@ function decreaseQuantity(productId) {
 */
 
 function removeProductFromCart(productId) {
-  const product = products.find(item => item.productId === productId);
-  if (product) {
-    product.quantity = 0;
-    cart = cart.filter(item => item.productId !== productId);
+  const index = cart.findIndex(p => p.productId === productId);
+  if (index !== -1) {
+    cart[index].quantity = 0;  // Reset quantity
+    cart.splice(index, 1);     // Remove from cart
   }
 }
+
 
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total cost of all products
@@ -115,16 +112,16 @@ function cartTotal() {
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].price * cart[i].quantity;
   }
-  return parseFloat(total.toFixed(2));
+  return total;  // Return as a number directly
 }
-
 
 /* Create a function called emptyCart that empties the products from the cart */
 
 function emptyCart() {
-  cart.forEach(product => product.quantity = 0);
+  cart.forEach(item => item.quantity = 0);
   cart = [];
 }
+
 
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
@@ -134,9 +131,10 @@ function emptyCart() {
 */
 
 function pay(amount) {
-  const total = cartTotal();
-  return amount - total;
+  const totalCost = cartTotal();
+  return parseFloat((amount - totalCost).toFixed(2));
 }
+
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
