@@ -1,5 +1,6 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
 let products = [];
+let totalPaid = 0;
 
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
@@ -132,7 +133,8 @@ function emptyCart() {
 
 function pay(amount) {
   const totalCost = cartTotal();
-  return parseFloat((amount - totalCost).toFixed(2));
+  totalPaid = amount;
+  return amount - totalCost;
 }
 
 
