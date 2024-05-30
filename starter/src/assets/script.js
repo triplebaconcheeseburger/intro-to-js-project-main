@@ -116,6 +116,7 @@ function cartTotal() {
   return total;  // Return as a number directly
 }
 
+
 /* Create a function called emptyCart that empties the products from the cart */
 
 function emptyCart() {
@@ -132,9 +133,23 @@ function emptyCart() {
 */
 
 function pay(amount) {
-  const totalCost = cartTotal();
-  totalPaid = amount;
-  return amount - totalCost;
+
+  // Add the current payment amount to the totalPaid variable
+  totalPaid += amount
+
+  // Calculate the difference between the totalPaid and the cartTotal
+  let remaining = totalPaid - cartTotal();
+
+  // Check if the remaining amount is greater than or equal to zero
+  if (remaining >= 0) {
+      // If so, reset the `totalPaid` to zero to prepare it for the next
+      // payment, as the current payment is enough to cover the `cartTotal`.
+      totalPaid = 0;
+      emptyCart()
+  }
+
+  // Return the remaining (negative if payment is less than the cartTotal)
+  return remaining;
 }
 
 
