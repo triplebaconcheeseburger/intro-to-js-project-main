@@ -96,8 +96,8 @@ function decreaseQuantity(productId) {
 function removeProductFromCart(productId) {
   const index = cart.findIndex(p => p.productId === productId);
   if (index !== -1) {
-    cart[index].quantity = 0;  // Reset quantity
-    cart.splice(index, 1);     // Remove from cart
+    cart[index].quantity = 0;  
+    cart.splice(index, 1);     
   }
 }
 
@@ -113,7 +113,7 @@ function cartTotal() {
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].price * cart[i].quantity;
   }
-  return total;  // Return as a number directly
+  return total;  // Return total
 }
 
 
@@ -134,16 +134,9 @@ function emptyCart() {
 
 function pay(amount) {
 
-  // Add the current payment amount to the totalPaid variable
   totalPaid += amount
-
-  // Calculate the difference between the totalPaid and the cartTotal
   let remaining = totalPaid - cartTotal();
-
-  // Check if the remaining amount is greater than or equal to zero
   if (remaining >= 0) {
-      // If so, reset the `totalPaid` to zero to prepare it for the next
-      // payment, as the current payment is enough to cover the `cartTotal`.
       totalPaid = 0;
       emptyCart()
   }
